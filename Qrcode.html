@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<title>QrCode</title>
+	<style type="text/css">
+		.codeImg{
+			float: left;
+			margin-right: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div id="qrcode" class="codeImg"></div>
+	<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="qrcode.min.js"></script>
+    <script type="text/javascript">
+      var qrcode = new QRCode(document.getElementById("qrcode"), {
+        width: 100,
+        height: 100,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.L
+      });
+
+      function makeCode(Code) {
+        qrcode.makeCode(Code);
+      }
+      
+      makeCode('test');
+    </script>
+</body>
+</html>
