@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<title>Document</title>
+</head>
+<body>
+	<h3>Orientation</h3>
+	<p id="Ox"></p>
+	<p id="Oy"></p>
+	<p id="Oz"></p>
+	<h3>Motion</h3>
+	<p id="Mx"></p>
+	<p id="My"></p>
+	<p id="Mz"></p>
+	<script type="text/javascript">
+		function getDom(name) {
+			return document.getElementById(name);
+		}
+		const $Ox = getDom('Ox'),
+			  $Oy = getDom('Oy'),
+			  $Oz = getDom('Oz'),
+			  $Mx = getDom('Mx'),
+			  $My = getDom('My'),
+			  $Mz = getDom('Mz');
+		if(window.DeviceOrientationEvent) {
+			window.addEventListener("deviceorientation",handleOrientation());
+			window.addEventListener("devicemotion",handleMotion(),true);
+		}else {
+			alert('not support')
+		}
+		function handleOrientation(event) {
+			$Ox.innerHTML = event ? Math.round(event.beta) : 0;
+			$Oy.innerHTML = event ? Math.round(event.gamma) : 0;
+			$Oz.innerHTML = event ? Math.round(event.alpha) : 0;
+		}
+		function handleMotion(event) {
+			$Mx.innerHTML = event ? Math.round(event.acceleration.x) : 0;
+			$My.innerHTML = event ? Math.round(event.acceleration.y) : 0;
+			$Mz.innerHTML = event ? Math.round(event.acceleration.z) : 0;
+		}
+	</script>
+</body>
+</html>
