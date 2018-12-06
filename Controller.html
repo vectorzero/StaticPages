@@ -28,16 +28,16 @@
 			  $wheel = getDom('wheel');
 		if(window.DeviceOrientationEvent) {
 			window.addEventListener("devicemotion",function (event){
-				let rotate =  Math.round(event.acceleration.x) || 0;
 				$Mx.innerHTML = Math.round(event.acceleration.x) || 0;
 				$My.innerHTML = Math.round(event.acceleration.y) || 0;
 				$Mz.innerHTML = Math.round(event.acceleration.z) || 0;
-				$wheel.style.transform = `rotate(${rotate}deg)`; 
 			},true);
 			window.addEventListener("deviceorientation", function (event) {
+				let rotate = Math.round(event.beta) || 0;
 				$Ox.innerHTML = Math.round(event.beta) || 0;
 				$Oy.innerHTML = Math.round(event.gamma) || 0;
-				$Oz.innerHTML = Math.round(event.alpha) || 0;			
+				$Oz.innerHTML = Math.round(event.alpha) || 0;
+				$wheel.style.transform = `rotate(${rotate}deg)`; 			
 			}, true);
 		}else {
 			alert('not support')
