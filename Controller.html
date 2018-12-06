@@ -25,23 +25,18 @@
 			  $My = getDom('My'),
 			  $Mz = getDom('Mz');
 		if(window.DeviceOrientationEvent) {
-			//window.addEventListener("deviceorientation",handleOrientation(event));
-			window.addEventListener("devicemotion",handleMotion(event),true);
+			window.addEventListener("devicemotion",function (event){
+				$Mx.innerHTML = event ? Math.round(event.acceleration.x) : 0;
+				$My.innerHTML = event ? Math.round(event.acceleration.y) : 0;
+				$Mz.innerHTML = event ? Math.round(event.acceleration.z) : 0;
+			},true);
 			window.addEventListener("deviceorientation", function (event) {
-				alert(event.alpha)				
+				$Ox.innerHTML = event ? Math.round(event.beta) : 0;
+				$Oy.innerHTML = event ? Math.round(event.gamma) : 0;
+				$Oz.innerHTML = event ? Math.round(event.alpha) : 0;			
 			}, true);
 		}else {
 			alert('not support')
-		}
-		function handleOrientation(event) {
-			$Ox.innerHTML = event ? Math.round(event.beta) : 0;
-			$Oy.innerHTML = event ? Math.round(event.gamma) : 0;
-			$Oz.innerHTML = event ? Math.round(event.alpha) : 0;
-		}
-		function handleMotion(event) {
-			$Mx.innerHTML = event ? Math.round(event.acceleration.x) : 0;
-			$My.innerHTML = event ? Math.round(event.acceleration.y) : 0;
-			$Mz.innerHTML = event ? Math.round(event.acceleration.z) : 0;
 		}
 	</script>
 </body>
