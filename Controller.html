@@ -25,8 +25,11 @@
 			  $My = getDom('My'),
 			  $Mz = getDom('Mz');
 		if(window.DeviceOrientationEvent) {
-			window.addEventListener("deviceorientation",handleOrientation(event));
+			//window.addEventListener("deviceorientation",handleOrientation(event));
 			window.addEventListener("devicemotion",handleMotion(event),true);
+			window.addEventListener("deviceorientation", function (event) {
+				alert(event.alpha)				
+			}, true);
 		}else {
 			alert('not support')
 		}
