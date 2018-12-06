@@ -1,1 +1,1 @@
-# StaticPages
+# Static Pages
