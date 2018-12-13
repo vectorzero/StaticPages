@@ -13,7 +13,7 @@
 </head>
 <body>
     <div id="qrcode" class="codeImg"></div>
-    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<!--     <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script> -->
     <script type="text/javascript" src="js/qrcode.min.js"></script>
     <script type="text/javascript">
       var qrcode = new QRCode(document.getElementById("qrcode"), {
@@ -28,7 +28,7 @@
         qrcode.makeCode(Code);
       }
       
-      makeCode('https://www.baidu.com');
+      makeCode('hello world');
     </script>
 </body>
 </html>
