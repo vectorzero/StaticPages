@@ -10,12 +10,40 @@
             margin: 0;
         }
 
-        .game-wrap {
+        .game-wrap, .result-wrap {
             position: relative;
             width: 100vw;
             height: 100vh;
-            background: #ccc;
             overflow: hidden;
+        }
+
+        .result-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .result-item {
+            font-size: 20px;
+            height: 50%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: auto;
+        }
+
+        .result-left {
+            background: #eee;
+        }
+
+        .result-right {
+            background: #fff;
+        }
+
+        .result-title {
+            margin-left: 5px;
         }
 
         .content-text {
@@ -34,7 +62,7 @@
 
         .title-msg {
             text-align: center;
-            font-size: 120px;
+            font-size: 100px;
             color: #4A4A4A;
         }
 
@@ -63,12 +91,14 @@
 <div id="indexWrap" class="index-wrap">
 
 </div>
+
 <div id="gameWrap" class="game-wrap">
     <div class="content-text">
         <button id="refreshBtn">重新开始</button>
         <div class="time-msg">
             <span id="timerMsg"></span>
         </div>
+        <button id="resultBtn">查看结果</button>
         <div id="titleMsg" class="title-msg">&nbsp;</div>
     </div>
     <div class="content-choose">
@@ -76,76 +106,67 @@
         <div id="leftWrap" class="choose-item choose-left"></div>
     </div>
 </div>
+
+<div id="resultWrap" class="result-wrap">
+    <div class="content-text">
+        <button id="restartBtn">重新开始</button>
+    </div>
+    <div class="content-choose">
+        <div id="rightContent" class="result-item result-right"></div>
+        <div id="leftContent" class="result-item result-left"></div>
+    </div>
+</div>
+
 <script type="module">
     import TITLE_DATA from './js/data.js';
 
     let timer = null;
-    let firstTitle;
-    let otherTitle;
+    let randomTitle;
     let GAME_TIME;
     let TEMP_DATA;
     let TITLE_LENGTH;
     let LEFT_TITLE;
     let RIGHT_TITLE;
 
-    const timerMsg = document.getElementById('timerMsg');
     const indexWrap = document.getElementById('indexWrap');
+    const gameWrap = document.getElementById('gameWrap');
+    const resultWrap = document.getElementById('resultWrap');
+    const timerMsg = document.getElementById('timerMsg');
     const titleMsg = document.getElementById('titleMsg');
     const rightWrap = document.getElementById('rightWrap');
     const leftWrap = document.getElementById('leftWrap');
     const refreshBtn = document.getElementById('refreshBtn');
-    
+    const resultBtn = document.getElementById('resultBtn');
+    const leftContent = document.getElementById('leftContent');
+    const rightContent = document.getElementById('rightContent');
+
     initVar();
 
     startInterval();
 
     function initVar() {
-        GAME_TIME = 60 * 3;
+        // indexWrap.style.display = 'none';
+        gameWrap.style.display = 'block';
+        resultWrap.style.display = 'none';
+        resultBtn.style.display = 'none';
+        leftContent.innerHTML = '';
+        rightContent.innerHTML = '';
+        GAME_TIME = 60 * 1;
         TEMP_DATA = TITLE_DATA.concat();
         TITLE_LENGTH = TITLE_DATA.length;
         LEFT_TITLE = [];
         RIGHT_TITLE = [];
-        getFirstTitle();
+        getRandomTitle();
     }
 
-    function getFirstTitle() {
-        firstTitle = '';
-        otherTitle = '';
-        let firstIndex = Math.floor(Math.random() * TITLE_LENGTH);
-        firstTitle = TEMP_DATA[firstIndex];
+    function getRandomTitle() {
+        let randomIndex = Math.floor(Math.random() * TITLE_LENGTH);
+        randomTitle = TEMP_DATA[randomIndex];
         if (TEMP_DATA.length) {
-            titleMsg.innerHTML = firstTitle;
+            titleMsg.innerHTML = randomTitle;
             TITLE_LENGTH--;
-            TEMP_DATA.splice(firstIndex, 1);
+            TEMP_DATA.splice(randomIndex, 1);
         }
-    }
-
-    function getOtherTitle(isRight) {
-        let otherIndex = Math.floor(Math.random() * TITLE_LENGTH);
-        otherTitle = TEMP_DATA[otherIndex];
-        if (TEMP_DATA.length) {
-                titleMsg.innerHTML = otherTitle;
-                TITLE_LENGTH--;
-                console.log(33,firstTitle)
-                if (!firstTitle) {
-                    if (isRight) {
-                        RIGHT_TITLE.push(otherTitle);
-                    } else {
-                        LEFT_TITLE.push(otherTitle);
-                    }
-                } else {
-                    if (isRight) {
-                        RIGHT_TITLE.push(firstTitle);
-                    } else {
-                        LEFT_TITLE.push(firstTitle);
-                    }
-                    firstTitle = '';
-                }
-                console.log(444,firstTitle)
-                TEMP_DATA.splice(otherIndex, 1);
-            }
-        console.log(1,LEFT_TITLE)
-        console.log(2,RIGHT_TITLE)
     }
 
     function countDown() {
@@ -155,7 +176,8 @@
             timerMsg.innerHTML = `剩下${minutes}分${seconds}秒`;
             GAME_TIME--;
         } else {
-            timerMsg.innerHTML = '时间到!';
+            timerMsg.innerHTML = '——时间到！——';
+            resultBtn.style.display = 'inline-block';
             clearInterval(timer)
         }
     }
@@ -168,18 +190,32 @@
 
     // 错误
     leftWrap.onclick = function () {
-        getOtherTitle(false);
+        randomTitle && LEFT_TITLE.push(randomTitle);
+        getRandomTitle();
     };
 
     // 正确
     rightWrap.onclick = function () {
-        getOtherTitle(true);
+        randomTitle && RIGHT_TITLE.push(randomTitle);
+        getRandomTitle();
     };
 
     // 刷新
     refreshBtn.onclick = function () {
         initVar();
-    }
+    };
+
+    // 查看结果
+    resultBtn.onclick = function () {
+        resultWrap.style.display = 'block';
+        gameWrap.style.display = 'none';
+        LEFT_TITLE.forEach(item => {
+            leftContent.innerHTML += `<div class="result-title">${item}</div>`;
+        });
+        RIGHT_TITLE.forEach(item => {
+            rightContent.innerHTML += `<div class="result-title">${item}</div>`;
+        });
+    };
 </script>
 </body>
 </html>
