@@ -12,46 +12,46 @@
 
         .game-wrap, .result-wrap {
             position: relative;
-            width: 100vw;
-            height: 100vh;
+            width: 100vh;
+            height: 100vw;
             overflow: hidden;
         }
 
         .result-wrap {
-            display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
         }
 
         .result-item {
+            box-sizing: border-box;
+            margin-top: 10%;
             font-size: 20px;
-            height: 50%;
-            width: 100%;
+            height: 100%;
+            width: 50%;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
             overflow: auto;
         }
 
         .result-left {
-            background: #eee;
+
         }
 
         .result-right {
-            background: #fff;
+
         }
 
         .result-title {
-            margin-left: 5px;
+
         }
 
         .content-text {
             text-align: center;
             position: absolute;
-            right: 8%;
-            top: 50%;
-            transform: translateY(-50%) rotate(90deg);
+            top: 8%;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .time-msg {
@@ -62,20 +62,19 @@
 
         .title-msg {
             text-align: center;
-            font-size: 100px;
+            font-size: 50px;
             color: #4A4A4A;
         }
 
         .content-choose {
-            width: 100%;
-            height: 100%;
+            /*width: 100%;
+            height: 100%;*/
             display: flex;
-            flex-direction: column;
         }
 
         .choose-item {
-            height: 50%;
-            width: 100%;
+            /*height: 100%;
+            width: 50%;*/
         }
 
         .choose-left {
@@ -136,13 +135,38 @@
     const rightWrap = document.getElementById('rightWrap');
     const leftWrap = document.getElementById('leftWrap');
     const refreshBtn = document.getElementById('refreshBtn');
+    const restartBtn = document.getElementById('restartBtn');
     const resultBtn = document.getElementById('resultBtn');
     const leftContent = document.getElementById('leftContent');
     const rightContent = document.getElementById('rightContent');
+    const body = document.getElementsByTagName('body')[0];
+    const contentChoose = document.getElementsByClassName('content-choose');
+    const chooseItem = document.getElementsByClassName('choose-item');
+
+    horizontalScreen(body);
 
     initVar();
 
     startInterval();
+
+    /*强制横屏*/
+    function horizontalScreen(element) {
+        const conW = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        const conH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+        element.style.transform = "rotate(90deg) translate(" + ((conH - conW) / 2) + "px," + ((conH - conW) / 2) + "px)";
+        element.style.width = conH + "px";
+        element.style.height = conW + "px";
+        element.style.transformOrigin = "center center";
+        Array.from(contentChoose).forEach(item => {
+            item.style.width = conH + "px";
+            item.style.height = conW + "px";
+        });
+        Array.from(chooseItem).forEach(item => {
+            item.style.width = conH / 2 + "px";
+            item.style.height = conW + "px";
+        })
+    }
 
     function initVar() {
         // indexWrap.style.display = 'none';
@@ -151,7 +175,7 @@
         resultBtn.style.display = 'none';
         leftContent.innerHTML = '';
         rightContent.innerHTML = '';
-        GAME_TIME = 60 * 1;
+        GAME_TIME = 10;
         TEMP_DATA = TITLE_DATA.concat();
         TITLE_LENGTH = TITLE_DATA.length;
         LEFT_TITLE = [];
@@ -205,9 +229,14 @@
         initVar();
     };
 
+    // 重新开始
+    restartBtn.onclick = function () {
+        initVar();
+    };
+
     // 查看结果
     resultBtn.onclick = function () {
-        resultWrap.style.display = 'block';
+        resultWrap.style.display = 'flex';
         gameWrap.style.display = 'none';
         LEFT_TITLE.forEach(item => {
             leftContent.innerHTML += `<div class="result-title">${item}</div>`;
