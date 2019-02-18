@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
-    <title>Document</title>
+    <title>你比划我猜</title>
     <style type="text/css">
         * {
             padding: 0;
@@ -52,6 +52,19 @@
             top: 8%;
             left: 50%;
             transform: translateX(-50%);
+        }
+
+        .content-title {
+            display: flex;
+            text-align: center;
+            position: absolute;
+            top: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .restart-btn {
+            margin: auto 10px;
         }
 
         .time-msg {
@@ -107,8 +120,10 @@
 </div>
 
 <div id="resultWrap" class="result-wrap">
-    <div class="content-text">
-        <button id="restartBtn">重新开始</button>
+    <div class="content-title">
+        <div id="rightTitle"></div>
+        <button class="restart-btn" id="restartBtn">重新开始</button>
+        <div id="leftTitle"></div>
     </div>
     <div class="content-choose">
         <div id="rightContent" class="result-item result-right"></div>
@@ -139,6 +154,8 @@
     const resultBtn = document.getElementById('resultBtn');
     const leftContent = document.getElementById('leftContent');
     const rightContent = document.getElementById('rightContent');
+    const rightTitle = document.getElementById('rightTitle');
+    const leftTitle = document.getElementById('leftTitle');
     const body = document.getElementsByTagName('body')[0];
     const contentChoose = document.getElementsByClassName('content-choose');
     const chooseItem = document.getElementsByClassName('choose-item');
@@ -175,7 +192,10 @@
         resultBtn.style.display = 'none';
         leftContent.innerHTML = '';
         rightContent.innerHTML = '';
-        GAME_TIME = 10;
+        rightTitle.innerHTML = '';
+        leftTitle.innerHTML = '';
+        // timerMsg.innerHTML = '';
+        GAME_TIME = 60 * 3;
         TEMP_DATA = TITLE_DATA.concat();
         TITLE_LENGTH = TITLE_DATA.length;
         LEFT_TITLE = [];
@@ -214,24 +234,30 @@
 
     // 错误
     leftWrap.onclick = function () {
-        randomTitle && LEFT_TITLE.push(randomTitle);
-        getRandomTitle();
+        if (GAME_TIME >= 0) {
+            randomTitle && LEFT_TITLE.push(randomTitle);
+            getRandomTitle();
+        }
     };
 
     // 正确
     rightWrap.onclick = function () {
-        randomTitle && RIGHT_TITLE.push(randomTitle);
-        getRandomTitle();
+        if (GAME_TIME >= 0) {
+            randomTitle && RIGHT_TITLE.push(randomTitle);
+            getRandomTitle();
+        }
     };
 
     // 刷新
     refreshBtn.onclick = function () {
         initVar();
+        startInterval();
     };
 
     // 重新开始
     restartBtn.onclick = function () {
         initVar();
+        startInterval();
     };
 
     // 查看结果
@@ -244,6 +270,8 @@
         RIGHT_TITLE.forEach(item => {
             rightContent.innerHTML += `<div class="result-title">${item}</div>`;
         });
+        rightTitle.innerHTML = `答对${RIGHT_TITLE.length}个`;
+        leftTitle.innerHTML = `跳过${LEFT_TITLE.length}个`;
     };
 </script>
 </body>
