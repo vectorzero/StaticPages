@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		body {
+			display: flex;
+			justify-content: center;
+		}
+		.wrap {
+			border: 1px solid #ccc;
+			width: 400px;
+			height: 1300px;
+		}
+		.item1 {
+			display: flex;
+			border-bottom: 1px solid #000;
+		}
+		.item-1-1 {
+			width: 80px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 18px;
+		}
+		.item-1-2 {
+			width: 220px;
+			display: flex;
+			flex-direction: column;
+		}
+		.item-1-2-1 {
+			font-size: 12px;
+		}
+		.item-1-2-2 {
+			width: 100%;
+			height: 100px;
+			border: 1px solid #ccc;
+		}
+		.item-1-3 {
+			display: flex;
+			width: 90px;
+			height: 80px;
+			border: 1px solid #ccc;
+		}
+		.item2 {
+			display: flex;
+			height: 50px;
+			align-items: center;
+			font-size: 30px;
+			border-bottom: 1px solid #000;
+		}
+		.item3 {
+			display: flex;
+			height: 140px;
+			border-bottom: 1px solid #000;
+		}
+		.item-3-1 {
+			display: flex;
+			width: 70px;
+			justify-content: center;
+		}
+		.item-3-1 div {
+			margin-top: 30px;
+			text-align: center;
+			width: 30px;
+			height: 30px;
+			line-height: 30px;
+			font-size: 18px;
+			border: 1px solid #ccc;
+			border-radius: 50%;
+		}
+		.item-3-2 {
+
+		}
+		.item4 {
+			display: flex;
+			height: 140px;
+			border-bottom: 1px solid #000;
+		}
+		.item-4-1 {
+			width: 180px;
+			display: flex;
+			flex-direction: column;
+		}
+		.item-4-1 div {
+			display: flex;
+			width: 100%;
+			flex: 1;
+		}
+		.item-4-1-1 {
+			box-sizing: border-box;
+			height: 30px;
+			font-size: 12px;
+			padding-left: 20px;
+		}
+		.item-4-1-2 {
+			display: flex;
+			justify-content: center;
+			align-items: flex-end;
+			height: 70px;
+			font-size: 24px;
+			font-weight: bold;
+			border-top: 1px solid #000;
+			border-bottom: 1px solid #000;
+		}
+		.item-4-1-3 {
+			display: flex;
+			justify-content: center;
+			align-items: flex-end;
+			height: 50px;
+			font-size: 20px;
+			font-weight: bold;
+		}
+		.item-4-2 {
+			width: 180px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border-left: 1px solid #000;
+			border-right: 1px solid #000;
+		}
+		.item-4-2 div {
+			width: 120px;
+			height: 120px;
+			border: 1px solid #ccc;
+		}
+		.item-4-3 {
+			text-align: center;
+			width: 50px;  
+		    margin: 0 auto;  
+		    line-height: 24px;  
+		    font-size: 20px;
+			border-right: 1px solid #000;
+			height: 100%;
+		}
+		.item-4-4 {
+			width: 130px;
+			display: flex;
+			flex-direction: column;
+		}
+		.item-4-4-1 {
+			width: 100%;
+			height: 100px;
+			border-bottom: 1px solid #ccc;
+		}
+		.item-4-4-2 {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			height: 40px;
+			font-size: 16px;
+			font-weight: bold;
+		}
+		.item5 {
+			display: flex;
+			height: 120px;
+			border-bottom: 1px solid #000;
+		}
+		.item-5-1 {
+			display: flex;
+			width: 70px;
+			justify-content: center;
+		}
+		.item-5-1 div {
+			margin-top: 30px;
+			text-align: center;
+			width: 30px;
+			height: 30px;
+			line-height: 30px;
+			font-size: 18px;
+			border: 1px solid #ccc;
+			border-radius: 50%;
+		}
+		.item6 {
+			width: 100%;
+			height: 120px;
+			border-bottom: 1px solid #000;
+			display: flex;
+			flex-direction: column;
+		}
+		.item-6-3 {
+			display: flex;
+		}
+		.item8 {
+			display: flex;
+			height: 80px;
+			border-bottom: 1px solid #000;
+		}
+		.item-8-1 {
+			display: flex;
+			flex-direction: column;
+		}
+		.item-8-2 {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.item-8-3 {
+			width: 220px;
+			display: flex;
+			flex-direction: column;
+		}
+		.item-8-3-1 {
+			font-size: 12px;
+		}
+		.item-8-3-2 {
+			width: 100%;
+			height: 100px;
+			border: 1px solid #ccc;
+		}
+		.item9 {
+			display: flex;
+			height: 70px;
+			border-bottom: 1px solid #000;
+		}
+		.item-9-1 {
+			display: flex;
+			width: 70px;
+			justify-content: center;
+		}
+		.item-9-1 div {
+			margin-top: 30px;
+			text-align: center;
+			width: 30px;
+			height: 30px;
+			line-height: 30px;
+			font-size: 18px;
+			border: 1px solid #ccc;
+			border-radius: 50%;
+		}
+		.item10 {
+			display: flex;
+			height: 70px;
+			border-bottom: 1px solid #000;
+		}
+		.item-10-1 {
+			display: flex;
+			width: 70px;
+			justify-content: center;
+		}
+		.item-10-1 div {
+			margin-top: 30px;
+			text-align: center;
+			width: 30px;
+			height: 30px;
+			line-height: 30px;
+			font-size: 18px;
+			border: 1px solid #ccc;
+			border-radius: 50%;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="item1">
+			<div class="item-1-1">1/1</div>
+			<div class="item-1-2">
+				<div class="item-1-2-1">zj 打印时间 2019-05-05 08:00 xxxxxx</div>
+				<div class="item-1-2-2"></div>
+			</div>
+			<div class="item-1-3"></div>
+		</div>
+		<div class="item2">755WE-571A3</div>
+		<div class="item3">
+			<div class="item-3-1">
+				<div>收</div>
+			</div>
+			<div class="item-3-2">
+				<p>林某某  155515454545</p>
+				<p>顺丰</p>
+				<p>xx省xxx市xxx</p>
+				<p>xxxxxxxxxxxxxx</p>
+				<p>xxxxxxxx</p>
+			</div>
+		</div>
+		<div class="item4">
+			<div class="item-4-1">
+				<div class="item-4-1-1">寄付</div>
+				<div class="item-4-1-2">F33</div>
+				<div class="item-4-1-3">021WTF</div>
+			</div>
+			<div class="item-4-2">
+				<div></div>
+			</div>
+			<div class="item-4-3">已验视</div>
+			<div class="item-4-4">
+				<div class="item-4-4-1">xxx</div>
+				<div class="item-4-4-2">1A</div>
+			</div>
+		</div>
+		<div class="item5">
+			<div class="item-5-1">
+				<div>寄</div>
+			</div>
+			<div class="item-5-2">
+				<p>xxxxxxxxx xxx</p>
+				<p>xxxxxxxxx</p>
+				<p>xxxxxxxxxx</p>
+			</div>
+			<div class="item-5-3">
+				<div></div>
+			</div>
+		</div>
+		<div class="item6">
+			<div class="item-6-1">
+				<div>
+					<span>xxxx：</span>
+					<span>aaaaaaa</span>
+				</div>
+			</div>
+			<div class="item-6-2">
+				<div>
+					<span>xxxx：</span>
+					<span>aaaaaaa</span>
+				</div>
+			</div>
+			<div class="item-6-3">
+				<div>
+					<span>xxxx：</span>
+					<span>aaaaaaa</span>
+				</div>
+				<div>
+					<span>xxxx：</span>
+					<span>aaaaaaa</span>
+				</div>
+				<div>
+					<span>xxxx：</span>
+					<span>aaaaaaa</span>
+				</div>
+			</div>
+			<div class="item-6-4">
+				<div>
+					<span>xxxx：</span>
+					<span>aaaaaaa</span>
+				</div>
+			</div>
+		</div>
+		<div class="item7"></div>
+		<div class="item8">
+			<div class="item8-1">
+				<div></div>
+				<div></div>
+			</div>
+			<div class="item8-2">1/1</div>
+			<div class="item8-3">
+				
+			</div>
+			<div class="item8-4">
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+		<div class="item9">
+			<div class="item-9-1">
+				<div>收</div>
+			</div>
+			<div class="item-9-2">
+				<p>林某某  155515454545</p>
+				<p>顺丰</p>
+				<p>xx省xxx市xxx</p>
+			</div>
+		</div>
+		<div class="item10">
+			<div class="item-10-1">
+				<div>寄</div>
+			</div>
+			<div class="item-10-2">
+				<p>林某某  155515454545</p>
+				<p>顺丰</p>
+				<p>xx省xxx市xxx</p>
+			</div>
+		</div>
+		<div class="item11">
+			<div>
+				
+			</div>
+			<div>
+				<div>
+					<span>xxxx：</span>
+					<span>aaaaaaa</span>
+				</div>
+				<div>
+					<span>xxxx：</span>
+					<span>aaaaaaa</span>
+				</div>
+				<div>
+					<span>xxxx：</span>
+					<span>aaaaaaa</span>
+				</div>
+			</div>
+		</div>
+		<div class="item12"></div>
+	</div>
+</body>
+</html>
