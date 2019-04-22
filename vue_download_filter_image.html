@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.hello {
+			width: 50px;
+			height: 50px;
+			filter: grayscale(100%);
+		}
+		img {
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+</head>
+<body>
+	<script src="//unpkg.com/vue/dist/vue.js"></script>
+	<!-- <script src="./html2canvas.js"></script> -->
+	<!-- <script src="./canvas2image.js"></script> -->
+    <div id="app">
+    	<template>
+			<div class="hello" ref="ok">
+				<img src="./FM/fmlogo.jpg" />
+			</div>
+			<button @click="turnToNewImage('ok')">hello</button>
+    	</template>
+    </div>
+    <script>
+    	var Main = {
+			data() {
+				return {
+					
+				}
+			},
+			methods: {
+				turnToNewImage(refName) {
+					let dom = this.$refs[refName];
+				    var cssRenderImage2PureImage = function (dom, callback) {
+				         
+				        // 尺寸
+				        var width = dom.offsetWidth;
+				        var height = dom.offsetHeight;
+				        
+				        // 复制DOM节点
+				        var cloneDom = dom.cloneNode(true);
+				        cloneDom.setAttribute('xmlns', 'http://www.w3.org/1999/xhtml');
+
+				        // 图像元素处理
+				        var eleImg = cloneDom.querySelector('img');
+				        // 图像变成base64
+				        var tempImg = new Image();
+				        tempImg.onload = function () {
+				            var canvas = document.createElement('canvas');
+				            canvas.width = width;
+				            canvas.height = height;
+				            // 上下文
+				            var context = canvas.getContext('2d');
+				            // 绘制在画布上
+				            context.drawImage(tempImg, 0, 0, width, height);
+
+				            // 图像转换
+				            eleImg.src = canvas.toDataURL();
+
+				            // 进一步转换
+				            var svgImg = new Image();
+				            svgImg.onload = function () {
+				                // canvas绘制合成图
+				                context.clearRect(0, 0, width, height);
+				                context.drawImage(svgImg, 0, 0, width, height);
+				                // 使用jpeg格式
+				                callback && callback(canvas.toDataURL('image/jpeg'));
+				            };
+				            svgImg.src = 'data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="' + width + '" height="' + height + '"><foreignObject x="0" y="0" width="100%" height="100%">'+ 
+				            new XMLSerializer().serializeToString(cloneDom).replace(/#/g, '%23').replace(/\n/g, '%0A') +
+				            document.querySelector('style').outerHTML +
+				         '</foreignObject></svg>';
+				        };
+				        tempImg.src = eleImg.src;
+				    };
+
+				    // 执行
+				    cssRenderImage2PureImage(dom, function (url) {
+				        let link = document.createElement('a')
+				        link.style.display = 'none'
+				        link.href = url
+				        link.setAttribute('download', refName)
+				        document.body.appendChild(link)
+				        link.click()
+				    });
+				}
+			}
+		}
+		var Ctor = Vue.extend(Main)
+		new Ctor().$mount('#app')
+    </script>
+</body>
+</html>
