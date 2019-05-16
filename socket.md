@@ -36,7 +36,7 @@ main.js
 import VueSocketio from 'vue-socket.io';
 import socketio from 'socket.io-client';
 
-const SocketInstance = socketio.connect('http://10.5.9.23:8666');
+const SocketInstance = socketio.connect('localhost:8666');
 Vue.use(new VueSocketio({
   debug: true,
   connection: SocketInstance
