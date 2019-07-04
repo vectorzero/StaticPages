@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+	<title>你比划我猜</title>
+	<link rel="stylesheet" href="https://unpkg.com/element-ui@2.4.8/lib/theme-chalk/index.css">
+	<style type="text/css">
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		.wrapper {
+			width: 100vw;
+			height: 100vh;
+			overflow: hidden;
+			position: relative;
+		}
+		.header-wrap {
+			position: absolute;
+			top: 5%;
+			left: 45%;
+		}
+		.left-wrap {
+			width: 50%;
+			height: 100%;
+			background: #ccc;
+		}
+		.right-wrap {
+			width: 50%;
+			height: 100%;
+			background: #fff;
+		}
+	</style>
+</head>
+
+<body>
+	<script src="//unpkg.com/vue/dist/vue.js"></script>
+	<script src="//unpkg.com/element-ui@2.10.1/lib/index.js"></script>
+	<div id="app">
+		<template>
+			<div class="wrapper">
+				<div class="header-wrap">
+					<el-button type="primary">重新开始</el-button>
+					<el-button type="success">查看结果</el-button>
+				</div>
+				<div class="left-wrap"></div>
+				<div class="right-wrap"></div>
+			</div>
+		</template>
+	</div>
+	<script type="module">
+		import TITLE_DATA from './js/data.js';
+		var Main =
+		{
+			data() {
+				return {
+					titleList: [],
+					titleListLength: 0
+				}
+			},
+			created() {
+				this.titleList = TITLE_DATA;
+				this.tempTitleList = TITLE_DATA.concat();
+				this.titleListLength = TITLE_DATA.length;
+			},
+			mounted() {
+				console.log(TITLE_DATA)
+			},
+			methods: {
+				getRandomTitle() {
+					// let randomIndex = Math.floor(Math.random() * TITLE_LENGTH);
+					// randomTitle = TEMP_DATA[randomIndex];
+					// if (tempTitleList.length) {
+					// 		titleMsg.innerHTML = randomTitle;
+					// 		TITLE_LENGTH--;
+					// 		TEMP_DATA.splice(randomIndex, 1);
+					// }
+				}
+			}
+		}
+		var Ctor = Vue.extend(Main)
+		new Ctor().$mount('#app')
+	</script>
+	<script type="module">
+    // import TITLE_DATA from './js/data.js';
+
+    // let timer = null;
+    // let randomTitle;
+    // let GAME_TIME;
+    // let TEMP_DATA;
+    // let TITLE_LENGTH;
+    // let LEFT_TITLE;
+    // let RIGHT_TITLE;
+
+    // initVar();
+
+    // startInterval();
+
+    // function initVar() {
+    //     // indexWrap.style.display = 'none';
+    //     gameWrap.style.display = 'block';
+    //     resultWrap.style.display = 'none';
+    //     resultBtn.style.display = 'none';
+    //     leftContent.innerHTML = '';
+    //     rightContent.innerHTML = '';
+    //     rightTitle.innerHTML = '';
+    //     leftTitle.innerHTML = '';
+    //     // timerMsg.innerHTML = '';
+    //     GAME_TIME = 60 * 3;
+    //     TEMP_DATA = TITLE_DATA.concat();
+    //     TITLE_LENGTH = TITLE_DATA.length;
+    //     LEFT_TITLE = [];
+    //     RIGHT_TITLE = [];
+    //     getRandomTitle();
+    // }
+
+    // function getRandomTitle() {
+    //     let randomIndex = Math.floor(Math.random() * TITLE_LENGTH);
+    //     randomTitle = TEMP_DATA[randomIndex];
+    //     if (TEMP_DATA.length) {
+    //         titleMsg.innerHTML = randomTitle;
+    //         TITLE_LENGTH--;
+    //         TEMP_DATA.splice(randomIndex, 1);
+    //     }
+    // }
+
+    // function countDown() {
+    //     if (GAME_TIME >= 0) {
+    //         let minutes = (Math.floor(GAME_TIME / 60)).toString().length < 2 ? '0' + Math.floor(GAME_TIME / 60) : Math.floor(GAME_TIME / 60);
+    //         let seconds = (Math.floor(GAME_TIME % 60)).toString().length < 2 ? '0' + Math.floor(GAME_TIME % 60) : Math.floor(GAME_TIME % 60);
+    //         timerMsg.innerHTML = `剩下${minutes}分${seconds}秒`;
+    //         GAME_TIME--;
+    //     } else {
+    //         timerMsg.innerHTML = '——时间到！——';
+    //         resultBtn.style.display = 'inline-block';
+    //         clearInterval(timer)
+    //     }
+    // }
+
+    // function startInterval() {
+    //     timer = setInterval(() => {
+    //         countDown()
+    //     }, 1000);
+    // }
+
+    // // 错误
+    // leftWrap.onclick = function () {
+    //     if (GAME_TIME >= 0) {
+    //         randomTitle && LEFT_TITLE.push(randomTitle);
+    //         getRandomTitle();
+    //     }
+    // };
+
+    // // 正确
+    // rightWrap.onclick = function () {
+    //     if (GAME_TIME >= 0) {
+    //         randomTitle && RIGHT_TITLE.push(randomTitle);
+    //         getRandomTitle();
+    //     }
+    // };
+
+    // // 刷新
+    // refreshBtn.onclick = function () {
+    //     initVar();
+    //     startInterval();
+    // };
+
+    // // 重新开始
+    // restartBtn.onclick = function () {
+    //     initVar();
+    //     startInterval();
+    // };
+
+    // // 查看结果
+    // resultBtn.onclick = function () {
+    //     resultWrap.style.display = 'flex';
+    //     gameWrap.style.display = 'none';
+    //     LEFT_TITLE.forEach(item => {
+    //         leftContent.innerHTML += `<div class="result-title">${item}</div>`;
+    //     });
+    //     RIGHT_TITLE.forEach(item => {
+    //         rightContent.innerHTML += `<div class="result-title">${item}</div>`;
+    //     });
+    //     rightTitle.innerHTML = `答对${RIGHT_TITLE.length}个`;
+    //     leftTitle.innerHTML = `跳过${LEFT_TITLE.length}个`;
+    // };
+	</script>
+</body>
+
+</html>
