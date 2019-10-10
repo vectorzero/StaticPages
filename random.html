@@ -12,24 +12,21 @@
     <table>
         <tr>
             <th>姓名</th>
-            <td><button onclick="getName()">生成</button></td>
             <td id="clientName">林某亮</td>
-            <td><button onclick="handleCopy('name')">复制</button></td>
+            <td><button onclick="getName()">生成</button></td>        
         </tr>
         <tr>
             <th>手机</th>
-            <td><button onclick="getPhone()">生成</button></td>
             <td id="mobileTel">15622222222</td>
-            <td><button onclick="handleCopy('phone')">复制</button></td>
+            <td><button onclick="getPhone()">生成</button></td>
         </tr>
         <tr>
             <th>邮箱</th>
-            <td><button onclick="getMail()">生成</button></td>
             <td id="emailNum">54545454@qq.com</td>
-            <td><button onclick="handleCopy('email')">复制</button></td>
+            <td><button onclick="getMail()">生成</button></td>
         </tr>
     </table>
-    <textarea id="copyText" style="opacity: 0;"></textarea>
+    <textarea id="copyText" style="opacity: 0; z-index: -100"></textarea>
     <script>
         const copyText = document.getElementById("copyText");
         const clientName = document.getElementById("clientName");
@@ -66,6 +63,7 @@
             let givenName = givenNames[i];
             let name = familyName + givenName;
             clientName.innerHTML = name;
+            handleCopy('name');
         }
 
         function getPhone() {
@@ -76,6 +74,7 @@
                 prefix = prefix + Math.floor(Math.random() * 10);
             }
             mobileTel.innerHTML = prefix;
+            handleCopy('phone');
         }
 
         function getMail() {
@@ -84,6 +83,7 @@
                 prefix = prefix + Math.floor(Math.random() * 10);
             }
             emailNum.innerHTML = prefix + '@qq.com';
+            handleCopy('email');
         }
 
         function handleCopy(type) {
