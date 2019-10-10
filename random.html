@@ -22,12 +22,19 @@
             <td id="mobileTel">15622222222</td>
             <td><button onclick="handleCopy('phone')">复制</button></td>
         </tr>
+        <tr>
+            <th>邮箱</th>
+            <td><button onclick="getMail()">生成</button></td>
+            <td id="emailNum">54545454@qq.com</td>
+            <td><button onclick="handleCopy('email')">复制</button></td>
+        </tr>
     </table>
     <textarea id="copyText" style="opacity: 0;"></textarea>
     <script>
         const copyText = document.getElementById("copyText");
         const clientName = document.getElementById("clientName");
         const mobileTel = document.getElementById("mobileTel");
+        const emailNum = document.getElementById("emailNum");
         function getName() {
             const familyNames = new Array(
                 "赵", "钱", "孙", "李", "周", "吴", "郑", "王", "冯", "陈",
@@ -71,11 +78,21 @@
             mobileTel.innerHTML = prefix;
         }
 
+        function getMail() {
+            let prefix = '';
+            for (let j = 0; j < 8; j++) {
+                prefix = prefix + Math.floor(Math.random() * 10);
+            }
+            emailNum.innerHTML = prefix + '@qq.com';
+        }
+
         function handleCopy(type) {
             if (type === 'name') {
                 copyText.value = clientName.innerHTML;
             } else if (type === 'phone') {
                 copyText.value = mobileTel.innerHTML;
+            } else if (type === 'email') {
+                copyText.value = emailNum.innerHTML;
             }
             copyText.select();
             document.execCommand("Copy");
