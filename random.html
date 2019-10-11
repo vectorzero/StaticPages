@@ -25,13 +25,20 @@
       <td id="emailNum">54545454@qq.com</td>
       <td><button onclick="getMail()">生成</button></td>
     </tr>
+    <tr>
+      <th>_转驼峰</th>
+      <td><input type="text" id="underline" /></td>
+      <td><button onclick="ToCamelCase()">生成</button></td>
+    </tr>
   </table>
+
   <textarea id="copyText" style="opacity: 0; z-index: -100"></textarea>
   <script>
     const copyText = document.getElementById("copyText");
     const clientName = document.getElementById("clientName");
     const mobileTel = document.getElementById("mobileTel");
     const emailNum = document.getElementById("emailNum");
+    const underline = document.getElementById("underline");
 
     function getName() {
       const familyNames = new Array(
@@ -87,11 +94,23 @@
       handleCopy(prefix + '@qq.com');
     }
 
+    function camelCase(string) {
+      return string.replace(/_([a-z])/g, function (all, letter) {
+        return letter.toUpperCase();
+      });
+    }
+
+    function ToCamelCase() {
+      let camelcase = camelCase(underline.value);
+      handleCopy(camelcase);
+    }
+
     function handleCopy(content) {
       copyText.value = content;
       copyText.select();
       document.execCommand("Copy");
     }
+
   </script>
 </body>
 
